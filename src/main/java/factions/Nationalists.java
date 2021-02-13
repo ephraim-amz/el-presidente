@@ -2,8 +2,8 @@ package factions;
 
 public class Nationalists extends Faction {
 
-	public Nationalists(float approvalRate) {
-		super(approvalRate);
+	public Nationalists(double approvalRate, int factionSupporters) {
+		super(approvalRate, factionSupporters);
 	}
 
 }

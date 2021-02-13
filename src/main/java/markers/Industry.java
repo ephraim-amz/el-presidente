@@ -1,13 +1,18 @@
 package markers;
 
+import island.Island;
+
 public class Industry extends Marker{
 	
 	public Industry(float industryRate) {
 		super(industryRate);
 	}
 	
-	public float moneyGenerator() {
-		return super.getMarkerRate() * 40;
+	@Override
+	public double moneyGenerator(Island island) {
+		return island.getIndustryRate() * 10.;
 	}
+	
+	
 	
 }

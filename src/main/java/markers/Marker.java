@@ -1,6 +1,7 @@
 package markers;
 
 import exceptions.CumulException;
+import island.Island;
 
 public abstract class Marker {
 	private float markerRate;
@@ -22,5 +23,6 @@ public abstract class Marker {
 		
 		return aggregation;
 	}
-
+	
+	public abstract double moneyGenerator(Island island);
 }

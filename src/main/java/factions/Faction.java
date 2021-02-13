@@ -1,15 +1,20 @@
 package factions;
 
 public abstract class Faction {
-	private float approvalRate;
+	private double approvalRate;
+	private int factionSupporters;
 	
-	public Faction(float approvalRate) {
+	public Faction(double approvalRate,int factionSupporters) {
 		this.approvalRate = approvalRate;
-		
+		this.factionSupporters = factionSupporters;
 	}
 	
-	public float getTauxApprobation() {
+	public double getApprovalRate() {
 		return approvalRate;
+	}
+	
+	public int getFactionSupporters() {
+		return factionSupporters;
 	}
 
 }

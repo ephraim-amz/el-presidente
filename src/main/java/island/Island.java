@@ -1,21 +1,26 @@
 package island;
-import java.util.ArrayList;
+
+import java.util.List;
 
 import factions.Faction;
-import markers.Marker;
 
 public class Island {
-	private ArrayList<Faction> factions;
-	private Marker industry;
-	private Marker agriculture;
-	
-	public Island(ArrayList<Faction> factions, Marker industrie, Marker agriculture) {
+	private List<Faction> factions;
+	private double industryRate;
+	private double agricultureRate;
+
+	public Island(List<Faction> factions, double industrie, double agriculture) {
 		this.factions = factions;
-		this.industry = industrie;
-		this.agriculture = agriculture;
+		this.industryRate = industrie;
+		this.agricultureRate = agriculture;
 	}
-	
-	
-	
-	
+
+	public double getAgricultureRate() {
+		return agricultureRate;
+	}
+
+	public double getIndustryRate() {
+		return industryRate;
+	}
+
 }

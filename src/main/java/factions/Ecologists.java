@@ -2,8 +2,9 @@ package factions;
 
 public class Ecologists extends Faction {
 
-	public Ecologists(float approvalRate) {
-		super(approvalRate);
+	public Ecologists(double approvalRate, int factionSupporters) {
+		super(approvalRate, factionSupporters);
 	}
+
 
 }

@@ -1,9 +1,9 @@
 package factions;
 
-public class Religious extends Faction{
+public class Religious extends Faction {
 
-	public Religious(float approvalRate) {
-		super(approvalRate);
+	public Religious(double approvalRate, int factionSupporters) {
+		super(approvalRate, factionSupporters);
 	}
 
 }

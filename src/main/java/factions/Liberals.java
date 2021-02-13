@@ -2,8 +2,8 @@ package factions;
 
 public class Liberals extends Faction {
 
-	public Liberals(float approvalRate) {
-		super(approvalRate);
+	public Liberals(double approvalRate, int factionSupporters) {
+		super(approvalRate, factionSupporters);
 	}
 
 }
