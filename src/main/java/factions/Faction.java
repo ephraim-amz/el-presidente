@@ -1,15 +1,15 @@
 package factions;
 
 public abstract class Faction {
-	private float tauxApprobation;
+	private float approvalRate;
 	
-	public Faction(float tauxApprobation) {
-		this.tauxApprobation = tauxApprobation;
+	public Faction(float approvalRate) {
+		this.approvalRate = approvalRate;
 		
 	}
 	
 	public float getTauxApprobation() {
-		return tauxApprobation;
+		return approvalRate;
 	}
 
 }

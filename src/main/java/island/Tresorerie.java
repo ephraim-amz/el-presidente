@@ -1,3 +1,4 @@
+package island;
 
 public class Tresorerie {
 	private float tresorie;
