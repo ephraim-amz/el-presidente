@@ -11,4 +11,5 @@ public abstract class Faction {
 	public float getTauxApprobation() {
 		return tauxApprobation;
 	}
+
 }
