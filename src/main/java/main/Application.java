@@ -13,7 +13,7 @@ import factions.Militarists;
 import factions.Nationalists;
 import factions.Religious;
 import island.Island;
-import island.Treasury;
+import markers.Treasury;
 
 public class Application {
 
@@ -36,7 +36,7 @@ public class Application {
 			factions.add(new Militarists(approvalRate, factionSupporters));
 			factions.add(new Nationalists(approvalRate, factionSupporters));
 			factions.add(new Religious(approvalRate, factionSupporters));
-			Treasury treasury = new Treasury(200);
+			Treasury treasury = new Treasury(200,100);
 			Island island = new Island(factions, 15., 15.);
 		}
 	}
