@@ -2,7 +2,7 @@ package markers;
 
 import island.Island;
 
-public class Treasury extends Marker{
+public class Treasury extends DefaultMarker{
 	private float currentTreasury;
 
 	public Treasury(float markerRate,float currentTreasury) {

@@ -2,7 +2,7 @@ package markers;
 
 import island.Island;
 
-public class Industry extends Marker{
+public class Industry extends DefaultMarker{
 	
 	public Industry(float industryRate) {
 		super(industryRate);

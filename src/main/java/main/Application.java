@@ -20,24 +20,24 @@ public class Application {
 	public static void main(String[] args) {
 		String mode = args[0];
 		String dificulty = args[1];
-		List<Faction> factions = new ArrayList<>();
 		int factionSupporters;
 		double approvalRate;
 		double loyalistsApprovalRate;
-		if (mode.equals("bac à sable")) {
+		if (mode.equals("bac Ã  sable")) {
 			factionSupporters = 15;
 			approvalRate = 0.5;
 			loyalistsApprovalRate = 1.;
-			factions.add(new Capitalists(approvalRate, factionSupporters));
-			factions.add(new Communists(approvalRate, factionSupporters));
-			factions.add(new Ecologists(approvalRate, factionSupporters));
-			factions.add(new Liberals(approvalRate, factionSupporters));
-			factions.add(new Loyalists(loyalistsApprovalRate, factionSupporters));
-			factions.add(new Militarists(approvalRate, factionSupporters));
-			factions.add(new Nationalists(approvalRate, factionSupporters));
-			factions.add(new Religious(approvalRate, factionSupporters));
 			Treasury treasury = new Treasury(200,100);
-			Island island = new Island(factions, 15., 15.);
+			
+			Island island = new Island(15., 15.);
+			island.add(new Capitalists(approvalRate, factionSupporters));
+			island.add(new Communists(approvalRate, factionSupporters));
+			island.add(new Ecologists(approvalRate, factionSupporters));
+			island.add(new Liberals(approvalRate, factionSupporters));
+			island.add(new Loyalists(loyalistsApprovalRate, factionSupporters));
+			island.add(new Militarists(approvalRate, factionSupporters));
+			island.add(new Nationalists(approvalRate, factionSupporters));
+			island.add(new Religious(approvalRate, factionSupporters));
 		}
 	}
 

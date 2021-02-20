@@ -2,7 +2,7 @@ package markers;
 
 import island.Island;
 
-public class Agriculture extends Marker{
+public class Agriculture extends DefaultMarker{
 	private int foodUnits;
 	
 	public Agriculture(float agricultureRate,int foodUnits) {
