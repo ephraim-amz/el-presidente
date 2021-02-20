@@ -1,0 +1,4 @@
+									MENU PRINCIPAL
+	1 - Jouer en mode bac à sable
+	2 - Choisir un scénario
+	3 - Quitter le jeu
