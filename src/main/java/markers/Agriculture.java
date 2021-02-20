@@ -5,8 +5,8 @@ import island.Island;
 public class Agriculture extends Marker{
 	private int foodUnits;
 	
-	public Agriculture(float markerRate,int foodUnits) {
-		super(markerRate);
+	public Agriculture(float agricultureRate,int foodUnits) {
+		super(agricultureRate);
 		this.foodUnits = foodUnits;
 	}
 

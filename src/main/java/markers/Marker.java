@@ -1,6 +1,6 @@
 package markers;
 
-import exceptions.CumulException;
+import exceptions.AccumulationException;
 import island.Island;
 
 public abstract class Marker {
@@ -14,10 +14,10 @@ public abstract class Marker {
 		return markerRate;
 	}
 
-	public float markerAggregation(Marker m2) throws CumulException {
+	public float markerAccumulation(Marker m2) throws AccumulationException {
 		float aggregation = this.markerRate + m2.markerRate;
-		if (aggregation > 100.) {
-			throw new CumulException("The aggregation between the marker " + this + " and the marker " +
+		if (aggregation > 1.) {
+			throw new AccumulationException("The aggregation between the marker " + this + " and the marker " +
 		 m2 + " is not possible.");
 		}
 		
