@@ -17,4 +17,11 @@ public abstract class Faction {
 		return factionSupporters;
 	}
 
+	public void setApprovalRate(double approvalRate) {
+		this.approvalRate = approvalRate;
+	}
+
+	public void setFactionSupporters(int factionSupporters) {
+		this.factionSupporters = factionSupporters;
+	}
 }

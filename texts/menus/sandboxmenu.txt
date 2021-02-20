@@ -1,0 +1,5 @@
+									MENU MODE BAC A SABLE
+	1 - Lancer la partie en difficulté facile
+	2 - Lancer la partie en difficulté normal
+	3 - Lancer la partie en difficulté difficile
+	4 - Retour au menu principal
