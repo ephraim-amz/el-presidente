@@ -16,12 +16,26 @@ public abstract class Faction {
 	public int getFactionSupporters() {
 		return factionSupporters;
 	}
+	
+	public int getBribePrice() {
+		return factionSupporters * 15;
+	}
 
 	public void setApprovalRate(double approvalRate) {
-		this.approvalRate = approvalRate;
+		if (this.approvalRate != 0) {
+			this.approvalRate = approvalRate;
+		}
 	}
 
 	public void setFactionSupporters(int factionSupporters) {
 		this.factionSupporters = factionSupporters;
+	}
+	
+	public void addFactionSupporter() {
+		this.factionSupporters += 1;
+	}
+	
+	public void removeFactionSupporter() {
+		this.factionSupporters -= 1;
 	}
 }

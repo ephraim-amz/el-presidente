@@ -16,7 +16,9 @@ public class Menu {
 	private static final String MAIN_MENU = MENU_FOLDER + "mainmenu.txt";
 	private static final String SANDBOX_MENU = MENU_FOLDER + "sandboxmenu.txt";
 	private static final String GAME_MENU = MENU_FOLDER + "gamemenu.txt";
-	private static final String INVALID_CHOICE = "Le numéro choisi ne fait pas partie des choix possibles!";
+	private static final String END_OF_YEAR_MENU = MENU_FOLDER + "endofyearmenu.txt";
+	private static final String GAME_OVER = MENU_FOLDER + "gameover.txt";
+	private static final String INVALID_CHOICE = "\tLe numéro choisi ne fait pas partie des choix possibles!\n";
 		private static final double EASY = 0.5;
 	private static final double MEDIUM = 1;
 	private static final double HARD = 1.5;
@@ -36,16 +38,18 @@ public class Menu {
 			if (choice == 1) {
 				loadSandboxMenu();
 			} else if (choice == 2) {
-				System.out.println("Scénarios pas encore disponibles.");
-			} else if (choice == 3) {
-				break;
-			} else {
+				System.out.println("\tScénarios pas encore disponibles.");
+			} else if (choice != 3) {
 				System.out.println(INVALID_CHOICE);
 			}
 		}
-		quitGame();
+		quit();
 	}
 	
+	private void quit() {
+		System.out.println("\tA bientôt Presidente!");
+		System.exit(0);
+	}
 	
 	private void loadSandboxMenu() {
 		int choice = 0;
@@ -61,9 +65,7 @@ public class Menu {
 			} else if (choice == 3) {
 				game = new Game(HARD);
 				loadGameMenu();
-			} else if (choice == 4) {
-				break;
-			} else {
+			} else if (choice != 4) {
 				System.out.println(INVALID_CHOICE);
 			}
 		}
@@ -72,42 +74,94 @@ public class Menu {
 	public void loadGameMenu() {
 		int choice = 0;
 
-		while (choice < 1 || choice > 4) {
+		while (!game.isLost()) {
 			printGameMenu();
-			System.out.println("Il n'y a rien à voir pour l'instant appuyer sur 1/2/3/4");
+			System.out.println("\tIl n'y a pas d'event pour l'instant appuyer sur 1/2/3/4");
 			choice = menuChoiceScanner(GAME_MENU);
 //			loadEvent();
+			game.nextSeason(this);
+		}
+		try {
+			printMenu(GAME_OVER);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		printGameMenu();
+	}
+	
+	public void loadEndOfYearMenu() {
+		int choice = 0;
+
+		while (choice != 3 && choice != -1) {
+			printGameStats();
+			choice = menuChoiceScanner(END_OF_YEAR_MENU);
 			if (choice == 1) {
-				game.nextSeason();
+				loadBribeMenu();
 			} else if (choice == 2) {
-				game.nextSeason();
-			} else if (choice == 3) {
-				game.nextSeason();
-			} else if (choice == 4) {
-				game.nextSeason();
-			} else {
+				if (!game.buyFood()) {
+					System.out.println("\tNous n'avons pas de quoi acheter de la nourriture, Presidente!");
+				}
+			} else if (choice == -1) {
+				game.renounce();
+			} else if (choice != 3) {
 				System.out.println(INVALID_CHOICE);
 			}
 		}
 	}
 	
-	private void quitGame() {
-		System.out.println("A bientôt Presidente!");
-		System.exit(0);
+	public void loadBribeMenu() {
+		int choice = 0;
+
+		while (choice != 9) {
+			System.out.println("\tQuelle faction voulez vous \"Soutenir\", Presidente? (9 pour annuler)");
+			choice = numericScanner();
+			if (choice > 0 && choice < 9) {
+				if (game.getFactionBribePrice(choice) <= game.getTreasure()) {
+					game.bribeFaction(choice);
+					choice = 9;
+				} else {
+					System.out.println("\tNous ne pouvons rien leur offrir à part des pots en argile, Presidente...\n");
+					choice = 9;
+				}
+			} else if (choice != 9){
+				System.out.println(INVALID_CHOICE);
+			}
+		}
 	}
 	
 	private void printGameMenu() {
-		String gameMenu = "\t\t\t\t\t\t\t\tEL PRESIDENTE\n";
-		gameMenu = gameMenu + "\tAnnée " + game.getYear() + " Saison " + game.getSeasonName() + "\n"
-		+ "\tSatisfaction globale : " + DECIMAL_FORMAT.format(game.getGeneralApprovalRate()) + "%\n\n";
-		for (Faction faction : game) {
-			gameMenu = gameMenu + "\tFaction " + faction.getClass().getSimpleName()
-					+ "\tSatisfaction : " + DECIMAL_FORMAT.format(faction.getApprovalRate()) + "%"
-					+ "\tNombre de partisans : " + faction.getFactionSupporters() + "\n";
-		}
-		System.out.println(gameMenu);
+		System.out.println("\t\t\tAnnée " + game.getYear() + " Saison " + game.getSeasonName() + "\n");
+		printGameStats();
 	}
+	
+	private void printGameStats() {
+		String gameStats = "\tTrésorerie : " + game.getTreasure() + "$\t\tGains prévus : " + game.getGeneratedTreasure() + "$"
+				+ "\tSatisfaction limite : " + game.getLostRate() + "%\n"
+				+ "\tTaux d'industrie : " + game.getIndustryRate() * 100 + "%\tNourriture en stock : " + game.getStockedFood() + "\n"
+				+ "\tTaux d'agriculture : " + game.getAgricultureRate() * 100 + "%\tNourriture produite : " + game.getGeneratedFood() + "\n"
+				+ "\tSatisfaction globale : " + DECIMAL_FORMAT.format(game.getGeneralApprovalRate()) + "%" 
+				+ "\tNourriture requise en fin d'année : " + game.getNeededFood() + "\n";
+		System.out.println(gameStats);
+		printFactions();
+	}
+	
+	private void printFactions() {
+		String factions = "";
+		int factionNumber = 1;
 
+		for (Faction faction : game) {
+			factions += "\t" + factionNumber + " - Faction " + faction.getClass().getSimpleName();
+			if (!faction.getClass().getSimpleName().equals("Nationalists")) {
+				factions += "\t";
+			}
+			factions += "\tSatisfaction : " + DECIMAL_FORMAT.format(faction.getApprovalRate()) + "%"
+					+ "\tNombre de partisans : " + faction.getFactionSupporters()
+					+ "\tPrix du pot de vin : " + faction.getBribePrice() + "$\n";
+			factionNumber++;
+		}
+		System.out.println(factions);
+	}
+	
 	private int menuChoiceScanner(String menu) {
 		int choice = 0;
 		
@@ -146,7 +200,7 @@ public class Menu {
 		while (!this.isNumeric(choice)) {
 			choice = scanner.nextLine();
 			if (!this.isNumeric(choice)) {
-				System.out.println("Ce choix n'est pas un nombre!");
+				System.out.println("\tPresidente ce n'est pas un nombre!");
 			} else {
 				choiceNum = Integer.parseInt(choice);
 			}
