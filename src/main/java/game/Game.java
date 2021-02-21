@@ -234,7 +234,7 @@ public class Game extends Island {
 	 * Get the bribe price of a specific faction
 	 * 
 	 * @param factionNumber
-	 * @returnThe bribe price of the faction selected
+	 * @return The bribe price of the faction selected
 	 */
 	public int getFactionBribePrice(int factionNumber) {
 		return this.get(factionNumber - 1).getBribePrice();

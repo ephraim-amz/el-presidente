@@ -46,7 +46,6 @@ public abstract class Faction {
 
 	/**
 	 * Setter for the approval rate of the faction
-	 * @return the bribe price
 	 */
 	public void setApprovalRate(double approvalRate) {
 		if (this.approvalRate != 0) {

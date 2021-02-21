@@ -4,7 +4,6 @@ import exceptions.AccumulationException;
 
 /**
  * DefaultMarker, superclass of all markers
- * @implSpec {@link Marker}
  */
 public abstract class DefaultMarker implements Marker{
 	private float markerRate;
