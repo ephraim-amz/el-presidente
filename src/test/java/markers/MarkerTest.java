@@ -15,6 +15,10 @@ import org.junit.jupiter.api.TestReporter;
 
 import exceptions.AccumulationException;
 
+/**
+ * Unit tests of the markers
+ *
+ */
 class MarkerTest {
 	TestInfo testInfo;
 	TestReporter testReporter;

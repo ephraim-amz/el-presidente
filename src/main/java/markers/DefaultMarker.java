@@ -2,13 +2,25 @@ package markers;
 
 import exceptions.AccumulationException;
 
+/**
+ * DefaultMarker, superclass of all markers
+ * @implSpec {@link Marker}
+ */
 public abstract class DefaultMarker implements Marker{
 	private float markerRate;
 
+	/**
+	 * Constructor of the default marker 
+	 * @param markerRate
+	 */
 	public DefaultMarker(float markerRate) {
 		this.markerRate = markerRate;
 	}
 
+	/**
+	 * Getter for the marker rate
+	 * @return markerRate
+	 */
 	public float getMarkerRate() {
 		return markerRate;
 	}

@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.TestReporter;
 
+/**
+ * Unit tests of the factions
+ * 
+ */
 class FactionTest {
 	Faction capitalists;
 	Faction communists;
