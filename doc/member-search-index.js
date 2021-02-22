@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"events","c":"ApplyEffect","l":"ApplyEffect(int, Game)","url":"%3Cinit%3E(int,game.Game)"}]

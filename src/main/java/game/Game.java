@@ -346,4 +346,8 @@ public class Game extends Island {
 			return "Hiver";
 		}
 	}
+	
+	public int setTreasure(int treasure) {
+		return this.treasure = treasure;
+	}
 }

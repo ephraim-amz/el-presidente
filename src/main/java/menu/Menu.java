@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import events.*;
 import factions.Faction;
 import game.Game;
 
@@ -19,6 +20,7 @@ public class Menu {
 	private static final String MENU_FOLDER = "texts/menus/";
 	private static final String MAIN_MENU = MENU_FOLDER + "mainmenu.txt";
 	private static final String SANDBOX_MENU = MENU_FOLDER + "sandboxmenu.txt";
+	//private static final String SCENARIOS_MENU = MENU_FOLDER + "scenarios.txt";
 	private static final String GAME_MENU = MENU_FOLDER + "gamemenu.txt";
 	private static final String END_OF_YEAR_MENU = MENU_FOLDER + "endofyearmenu.txt";
 	private static final String GAME_OVER = MENU_FOLDER + "gameover.txt";
@@ -29,6 +31,9 @@ public class Menu {
 
 	private Scanner scanner;
 	private Game game;
+	private Events events;
+	private ApplyEffect answers;
+	private Scanner scannerAnswer;
 
 	/**
 	 * Menu constructor, generate a new Scanner
@@ -48,7 +53,8 @@ public class Menu {
 			if (choice == 1) {
 				loadSandboxMenu();
 			} else if (choice == 2) {
-				System.out.println("\tScénarios pas encore disponibles.");
+				//loadScenarios();
+				System.out.println("En cours de développement");
 			} else if (choice != 3) {
 				System.out.println(INVALID_CHOICE);
 			}
@@ -91,13 +97,11 @@ public class Menu {
 	 * Load the menu when the game is played
 	 */
 	public void loadGameMenu() {
-		int choice = 0;
-
+		//int choice = 0;
 		while (!game.isLost()) {
 			printGameMenu();
-			System.out.println("\tIl n'y a pas d'event pour l'instant appuyer sur 1/2/3/4");
-			choice = menuChoiceScanner(GAME_MENU);
-//			loadEvent();
+			//choice = menuChoiceScanner(GAME_MENU);
+			loadEvents();
 			game.nextSeason(this);
 		}
 		try {
@@ -267,6 +271,49 @@ public class Menu {
 			return true;
 		} catch (NumberFormatException e) {
 			return false;
+		}
+	}
+	
+	
+/*	public void loadScenarios() {
+		int choice = 0;
+
+		while (choice < 1 || choice > 2) {
+			choice = menuChoiceScanner(SCENARIOS_MENU);
+			if (choice == 1) {
+				loadEvents();
+			} else if (choice == 2) {
+				System.out.println(GAME_MENU);
+			}
+		}
+	}
+*/	
+	
+	/**
+	 * Event loader after scan of user type
+	 */
+	public void loadEvents() {
+		int choice = 0;
+		events = new Events();
+		scannerAnswer = new Scanner(System.in);
+		while (choice < 1 || choice > 4) {
+			choice = scannerAnswer.nextInt();
+			if (choice == 1) {
+				answers = new ApplyEffect(1, this.game);
+				loadGameMenu();
+			} 
+			else if (choice == 2) {
+				answers = new ApplyEffect(2, this.game);
+				loadGameMenu();
+			} 
+			else if (choice == 3) {
+				answers = new ApplyEffect(3, this.game);
+				loadGameMenu();
+			} 
+			else if (choice == 4) {
+				answers = new ApplyEffect(4, this.game);
+				loadGameMenu();
+			}
 		}
 	}
 }
