@@ -50,7 +50,11 @@ public abstract class Faction {
 	public void setApprovalRate(double approvalRate) {
 		if (this.approvalRate != 0) {
 			this.approvalRate = approvalRate;
+			if (this.approvalRate > 100) {
+				this.setApprovalRate(100);
+			}
 		}
+		
 	}
 
 	/**
