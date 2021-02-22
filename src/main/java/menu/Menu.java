@@ -31,9 +31,6 @@ public class Menu {
 
 	private Scanner scanner;
 	private Game game;
-	private Events events;
-	private ApplyEffect answers;
-	private Scanner scannerAnswer;
 
 	/**
 	 * Menu constructor, generate a new Scanner
@@ -97,10 +94,8 @@ public class Menu {
 	 * Load the menu when the game is played
 	 */
 	public void loadGameMenu() {
-		//int choice = 0;
 		while (!game.isLost()) {
 			printGameMenu();
-			//choice = menuChoiceScanner(GAME_MENU);
 			loadEvents();
 			game.nextSeason(this);
 		}
@@ -110,6 +105,32 @@ public class Menu {
 			e.printStackTrace();
 		}
 		printGameMenu();
+	}
+	
+	/**
+	 * Event loader after scan of user type
+	 */
+	public void loadEvents() {
+		int choice = 0;
+		
+		new Events();
+		while (choice < 1 || choice > 4) {
+			choice = numericScanner();
+			if (choice == 1) {
+				new ApplyEffect(1, this.game);
+			} 
+			else if (choice == 2) {
+				new ApplyEffect(2, this.game);
+			} 
+			else if (choice == 3) {
+				new ApplyEffect(3, this.game);
+			} 
+			else if (choice == 4) {
+				new ApplyEffect(4, this.game);
+			} else {
+				System.out.println(INVALID_CHOICE);
+			}
+		}
 	}
 
 	/**
@@ -273,47 +294,6 @@ public class Menu {
 			return false;
 		}
 	}
-	
-	
-/*	public void loadScenarios() {
-		int choice = 0;
-
-		while (choice < 1 || choice > 2) {
-			choice = menuChoiceScanner(SCENARIOS_MENU);
-			if (choice == 1) {
-				loadEvents();
-			} else if (choice == 2) {
-				System.out.println(GAME_MENU);
-			}
-		}
-	}
-*/	
-	
-	/**
-	 * Event loader after scan of user type
-	 */
-	public void loadEvents() {
-		int choice = 0;
-		events = new Events();
-		scannerAnswer = new Scanner(System.in);
-		while (choice < 1 || choice > 4) {
-			choice = scannerAnswer.nextInt();
-			if (choice == 1) {
-				answers = new ApplyEffect(1, this.game);
-				loadGameMenu();
-			} 
-			else if (choice == 2) {
-				answers = new ApplyEffect(2, this.game);
-				loadGameMenu();
-			} 
-			else if (choice == 3) {
-				answers = new ApplyEffect(3, this.game);
-				loadGameMenu();
-			} 
-			else if (choice == 4) {
-				answers = new ApplyEffect(4, this.game);
-				loadGameMenu();
-			}
-		}
-	}
 }
+	
+
